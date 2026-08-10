@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-2: #121212;
+  --color-bg-3: #18181a;
+  --color-ink: #f3f2ec;
+  --color-ink-dim: #93938c;
+  --color-ink-faint: #55554f;
+  --color-line: #2a2a27;
+  --color-red: #b3121a;
+  --color-red-dim: #6e0d12;
+  --color-red-bright: #d4222b;
+
+  --font-display: "Anton", sans-serif;
+  --font-label: "Oswald", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-red-bright);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+  }
+  .font-label {
+    font-family: var(--font-label);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* film grain texture, applied as a fixed overlay */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .clip-slash {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 6% 100%);
+  }
+  .clip-slash-r {
+    clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1px var(--color-line);
+    color: transparent;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
