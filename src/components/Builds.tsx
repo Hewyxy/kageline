@@ -10,9 +10,9 @@ const BUILDS = [
     note: "Built for the mountain roads and the midnight run alike — a stock chassis turned into a razor.",
   },
   {
-    code: "KAGE // S197",
-    model: "Ford Mustang S197",
-    engine: "4.0 V6",
+    code: "KAGE // S550",
+    model: "Ford Mustang GT",
+    engine: "5.0 V8 Coyote",
     stat: "Street Build",
     image: img.mustang(1400),
     note: "Proof that a street build doesn't need a swap to earn respect — just the right hands on it.",
